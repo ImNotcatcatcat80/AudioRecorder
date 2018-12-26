@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewItemIndex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageViewItemRedMic"
+        android:text="0"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewItemSize"
+        app:layout_constraintTop_toTopOf="@+id/textViewItemSize" />
+
+    <ImageView
+        android:id="@+id/imageViewItemRedMic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewItemSize"
+        android:layout_alignParentStart="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/textViewItemFileName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/presence_audio_busy"
+        tools:layout_editor_absoluteY="6dp" />
+
+    <TextView
+        android:id="@+id/textViewItemFileName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageViewItemRedMic"
+        android:text="FileName.m4a"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewItemRedMic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewItemRedMic" />
+
+    <TextView
+        android:id="@+id/textViewItemSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textViewItemFileName"
+        android:layout_below="@+id/textViewItemFileName"
+        android:text="100.0 kB"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/textViewItemFileName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewItemFileName" />
+
+</LinearLayout>

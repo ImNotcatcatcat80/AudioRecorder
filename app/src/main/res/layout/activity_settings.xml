@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="it.zerozero.audiorecorder.SettingsActivity">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/Vguideline0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="17dp" />
+
+    <TextView
+        android:id="@+id/textViewOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Options"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switchShowPause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Show Pause button    "
+        android:textAlignment="textStart"
+        app:layout_constraintEnd_toStartOf="@+id/Vguideline0"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOptions" />
+
+    <Switch
+        android:id="@+id/switchSaveExternal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Save on external storage    "
+        app:layout_constraintEnd_toStartOf="@+id/Vguideline0"
+        app:layout_constraintTop_toBottomOf="@+id/switchShowPause" />
+
+    <TextView
+        android:id="@+id/textViewFormat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Format"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchSaveExternal" />
+
+    <RadioGroup
+        android:id="@+id/RadioGroupFormat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/Vguideline0"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFormat">
+
+        <RadioButton
+            android:id="@+id/radioButtonMP4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".m4a (MPEG-4)"
+            android:textAlignment="viewStart" />
+
+        <RadioButton
+            android:id="@+id/radioButton3GPhq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".3GP high quality"
+            android:textAlignment="viewStart" />
+
+        <RadioButton
+            android:id="@+id/radioButton3GPhc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".3GP low quality"
+            android:textAlignment="viewStart" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewAudioSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:text="Audio Source"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSeekBarValue" />
+
+    <RadioGroup
+        android:id="@+id/RadioGroupAudioSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/RadioGroupFormat"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAudioSource">
+
+        <RadioButton
+            android:id="@+id/radioButtonMic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Microphone" />
+
+        <RadioButton
+            android:id="@+id/radioButtonCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Phone Call" />
+
+        <RadioButton
+            android:id="@+id/radioIncomingCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Call Incoming Audio" />
+    </RadioGroup>
+
+    <SeekBar
+        android:id="@+id/seekBarBitRate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/Vguideline0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RadioGroupFormat" />
+
+    <TextView
+        android:id="@+id/textViewSeekBarValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="seekBarValue"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarBitRate"
+        app:layout_constraintStart_toStartOf="@+id/seekBarBitRate"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarBitRate" />
+
+</android.support.constraint.ConstraintLayout>
