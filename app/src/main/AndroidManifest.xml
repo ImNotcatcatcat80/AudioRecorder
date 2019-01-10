@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="it.zerozero.audiorecorder">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -18,7 +19,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -33,6 +35,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,10 +46,14 @@
         <activity
             android:name=".SettingsActivity"
             android:label="Settings"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".ListActivity"
             android:label="Recordings List"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".MainActivity"/>
     </application>
 
