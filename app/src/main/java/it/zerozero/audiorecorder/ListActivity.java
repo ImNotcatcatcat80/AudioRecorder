@@ -91,7 +91,6 @@ public class ListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == 7) {
-            sortInverted = !sortInverted;
             if (sortInverted && !sortSize & !sortLastModified) {
                 sortSize = true;
             }
@@ -102,6 +101,7 @@ public class ListActivity extends AppCompatActivity {
             else if (sortInverted && !sortSize & sortLastModified){
                 sortLastModified = false;
             }
+            sortInverted = !sortInverted;
             invalidateOptionsMenu();
             generateFileList();
         }
