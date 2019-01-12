@@ -1,12 +1,9 @@
 package it.zerozero.audiorecorder;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +28,7 @@ public class ListActivity extends AppCompatActivity {
     private List<RecordingFile> recordingsList = new ArrayList<>();
     private RecordingsAdapter recordingsAdapter;
     private File recDir = null;
-    private boolean buttonList = false;
+    private boolean sortInverted = false;
     private boolean sortLastModified = false;
     private boolean sortSize = false;
 
@@ -72,20 +69,21 @@ public class ListActivity extends AppCompatActivity {
         });
         recDirStr = getIntent().getStringExtra("recDir");
 
-        getFileList();
+        generateFileList();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_filelist, menu);
-        MenuItem mi = menu.add(0, 7, 0, "SortAlpha");
-        if (buttonList) {
-            mi.setIcon(R.drawable.ic_filter_list_white_24dp);
-        }
-        else {
-            mi.setIcon(R.drawable.ic_sort_white_24dp);
-        }
+        MenuItem mi = menu.add(0, 7, 1, "SortBy...");
+        if (!sortSize & !sortLastModified) mi.setIcon(R.drawable.ic_sort_name_az);
+        else if (sortSize) mi.setIcon(R.drawable.ic_sort_size_09);
+        else if (sortLastModified) mi.setIcon(R.drawable.ic_sort_date_131);
         mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        MenuItem mx = menu.add(0, 8, 0, "SortInverted");
+        mx.setIcon(R.drawable.ic_sort_inverted);
+        mx.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        mx.setVisible(sortInverted);
         return true;
     }
 
@@ -93,8 +91,19 @@ public class ListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == 7) {
-            buttonList = !buttonList;
+            sortInverted = !sortInverted;
+            if (sortInverted && !sortSize & !sortLastModified) {
+                sortSize = true;
+            }
+            else if (sortInverted && sortSize & !sortLastModified) {
+                sortSize = false;
+                sortLastModified = true;
+            }
+            else if (sortInverted && !sortSize & sortLastModified){
+                sortLastModified = false;
+            }
             invalidateOptionsMenu();
+            generateFileList();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -113,7 +122,7 @@ public class ListActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        getFileList();
+        generateFileList();
     }
 
     public void doRenameClick() {
@@ -130,10 +139,10 @@ public class ListActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        getFileList();
+        generateFileList();
     }
 
-    private void getFileList() {
+    private void generateFileList() {
         if (recDirStr != null) {
             textViewDir.setText(recDirStr);
             recDir = new File(recDirStr);
@@ -151,17 +160,29 @@ public class ListActivity extends AppCompatActivity {
                     if (sortLastModified) {
                         long l1 = f1.getLastModified();
                         long l2 = f2.getLastModified();
-                        return (int) (l1 - l2);
+                        if (!sortInverted) {
+                            return (int) (l1 - l2);
+                        } else {
+                            return (int) (l2 - l1);
+                        }
                     }
                     else if (sortSize){
                         long l1 = f1.getSize();
                         long l2 = f2.getSize();
-                        return (int) (l1 - l2);
+                        if (!sortInverted) {
+                            return (int) (l1 - l2);
+                        } else {
+                            return (int) (l2 - l1);
+                        }
                     }
                     else {
                         String s1 = f1.getFileName();
                         String s2 = f2.getFileName();
-                        return s1.compareToIgnoreCase(s2);
+                        if (!sortInverted) {
+                            return s1.compareToIgnoreCase(s2);
+                        } else {
+                            return s2.compareToIgnoreCase(s1);
+                        }
                     }
                 }
             };
